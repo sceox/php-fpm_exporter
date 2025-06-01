@@ -1,13 +1,5 @@
 # php-fpm_exporter
 
-![Test](https://github.com/hipages/php-fpm_exporter/workflows/Test/badge.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/hipages/php-fpm_exporter)](https://goreportcard.com/report/github.com/hipages/php-fpm_exporter)
-[![GoDoc](https://godoc.org/github.com/hipages/php-fpm_exporter?status.svg)](https://godoc.org/github.com/hipages/php-fpm_exporter)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hipages_php-fpm_exporter&metric=alert_status)](https://sonarcloud.io/dashboard?id=hipages_php-fpm_exporter)
-[![Docker Pulls](https://img.shields.io/docker/pulls/hipages/php-fpm_exporter.svg)](https://hub.docker.com/r/hipages/php-fpm_exporter/)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/hipages/php-fpm_exporter.svg)](http://isitmaintained.com/project/hipages/php-fpm_exporter "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/hipages/php-fpm_exporter.svg)](http://isitmaintained.com/project/hipages/php-fpm_exporter "Percentage of issues still open")
-[![Open Source Helpers](https://www.codetriage.com/hipages/php-fpm_exporter/badges/users.svg)](https://www.codetriage.com/hipages/php-fpm_exporter)
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 
 A [prometheus](https://prometheus.io/) exporter for PHP-FPM.
@@ -24,10 +16,7 @@ A webserver such as NGINX or Apache is **NOT** needed!
   * [Options and defaults](#options-and-defaults)
   * [Why `--phpfpm.fix-process-count`?](#why---phpfpmfix-process-count)
   * [CLI Examples](#cli-examples)
-  * [Docker Examples](#docker-examples)
-  * [Kubernetes Example](#kubernetes-example)
 - [Metrics collected](#metrics-collected)
-- [Grafana Dasbhoard for Kubernetes](#grafana-dasbhoard-for-kubernetes)
 - [FAQ](#faq)
 - [Development](#development)
   * [E2E Tests](#e2e-tests)
@@ -44,11 +33,10 @@ A webserver such as NGINX or Apache is **NOT** needed!
 * Connects directly to PHP-FPM via TCP or Socket
 * Maps environment variables to CLI options
 * Fix for PHP-FPM metrics oddities
-* [Grafana Dashboard](https://grafana.com/dashboards/4912) for Kubernetes
 
 ## Usage
 
-`php-fpm_exporter` is released as [binary](https://github.com/hipages/php-fpm_exporter/releases) and [docker](https://hub.docker.com/r/hipages/php-fpm_exporter/) image.
+`php-fpm_exporter` is released as [binary](https://github.com/sceox/php-fpm_exporter/releases).
 It uses sensible defaults which usually avoids the need to use command parameters or environment variables.
 
 `php-fpm_exporter` supports 2 commands, `get` and `server`.
@@ -104,31 +92,6 @@ If you like to have a more granular reporting please use `phpfpm_process_state`.
   PHP_FPM_FIX_PROCESS_COUNT=1 go run main.go server --web.listen-address ":12345" --log.level=debug
   ```
 
-### Docker Examples
-
-* Run docker manually
-  ```
-  docker pull hipages/php-fpm_exporter
-  docker run -it --rm -e PHP_FPM_SCRAPE_URI="tcp://127.0.0.1:9000/status,tcp://127.0.0.1:9001/status" hipages/php-fpm_exporter
-  ```
-
-* Run the docker-compose example
-  ```
-  git clone git@github.com:hipages/php-fpm_exporter.git
-  cd php-fpm_exporter/test
-  docker-compose -p php-fpm_exporter up
-  ```
-  You can now access the following links:
-
-  * Prometheus: http://127.0.0.1:9090/
-  * php-fpm_exporter metrics: http://127.0.0.1:9253/metrics
-
-  [![asciicast](https://asciinema.org/a/1msR8nqAsFdHzROosUb7PiHvf.png)](https://asciinema.org/a/1msR8nqAsFdHzROosUb7PiHvf)
-
-### Kubernetes Example
-
-TBD
-
 ## Metrics collected
 
 ```
@@ -169,13 +132,6 @@ TBD
 # HELP phpfpm_up Could PHP-FPM be reached?
 # TYPE phpfpm_up gauge
 ```
-
-## Grafana Dasbhoard for Kubernetes
-
-The Grafana dashboard can be found [here](https://grafana.com/dashboards/4912).
-There is also a more generic version [here](./grafana/kubernetes-php-fpm.json).
-
-<img src="https://grafana.com/api/dashboards/4912/images/3079/image" width="600">
 
 ## FAQ
 
@@ -242,10 +198,6 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/hipages/php-fpm_exporter.svg)](https://starchart.cc/hipages/php-fpm_exporter)
 
 ## Alternatives
 
